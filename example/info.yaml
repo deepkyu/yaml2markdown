@@ -1,0 +1,14 @@
+whoami:
+  name: Hyoung-Kyu Song # your full name
+  username: deepkyu # `display` name that you want to **see**
+whatisthis:
+  usage: to automatically generate md table from yaml file # the purpose of the code
+  include_comment: true
+  if_no_comment: ~
+  license: MIT # of course
+misc:
+  message:
+    - year: 2022
+      message: Oh my stock ... 
+    - year: 2023
+      message: Good luck for my research
