@@ -27,7 +27,7 @@ jobs:
           python main.py --input example/info.yaml --output README.md
       - name: Commit markdown file
         run: |
-          git add .
+          git checkout ${{ github.head_ref }}
           git config --global user.name 'deepkyu'
           git config --global user.email 'song@deepkyu.me'
           git commit -am "Auto-generated markdown file"
