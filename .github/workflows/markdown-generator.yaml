@@ -31,7 +31,7 @@ jobs:
           python main.py --input example/info.yaml --output README.md
       - name: Commit markdown file
         run: |
-          git config --global user.name 'deepkyu'
-          git config --global user.email 'song@deepkyu.me'
-          git commit -am "Auto-generated markdown file"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -am "Auto-generated markdown file [actions skip]"
           git push
