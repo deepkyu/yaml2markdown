@@ -1,4 +1,5 @@
 from pathlib import Path
+import argparse
 
 from ruamel.yaml import YAML
 
@@ -91,17 +92,32 @@ def _as_list(key, max_depth, depth):
     _template[depth - 1] = key
     return _template
 
+def parse_args():
+    
+    parser = argparse.ArgumentParser(description="Parser for snippet about yaml2markdown converter")
+    
+    # -------- User arguments ----------------------------------------
+    
+    parser.add_argument(
+        '-i', '--input', type=str, required=True,
+        help="Input yaml path")
+    
+    parser.add_argument(
+        '-o', '--output', type=str, default='README.md',
+        help="Output markdown path")
+
+    args, _ = parser.parse_known_args()    
+    
+    return args
+
 
 if __name__ == "__main__":
     
-    if 'csv' in SAVE_AS.lower():
-        extension = '.csv'
-    elif 'tsv' in SAVE_AS.lower():
-        extension = '.tsv'
-    elif 'md' in SAVE_AS.lower():
-        extension = '.md'
-    elif 'markdown' in SAVE_AS.lower():
-        extension = '.md'
+    args = parse_args()
+    suffix = Path(args.output).suffix.lower()
+    
+    if not suffix in ['.csv', '.tsv', '.md']:
+        raise AssertionError(f"The extension is not supported!")
 
-    data = read_yaml_with_comment(filepath="example/info.yaml")
-    write_csv_from_dict(data, result_path=f"README{extension}")
+    data = read_yaml_with_comment(filepath=args.input)
+    write_csv_from_dict(data, result_path=args.output)
